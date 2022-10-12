@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Machine-generated Article Descriptions</title>
+	<link rel="shortcut icon" href="./static/favicon.ico">
+	<meta name="viewport" content="width = device-width, initial-scale=1, user-scalable = no" />
+	<link href="https://tools-static.wmflabs.org/fontcdn/css?family=Merriweather:400,400italic,700,700italic&subset=latin" rel="stylesheet" type="text/css">
+	<link href='https://tools-static.wmflabs.org/fontcdn/css?family=Lato:400,400italic,700,700italic&subset=latin' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="./static/style.css" />
+</head>
+
+<body>
+	<script type="text/javascript">
+		var body = document.body;
+		body.classList.add('js');
+	</script>
+
+	<div id="origin_bar">
+		<div class="boxwidth--1-1 padded--left padded--right">
+			<a href="https://research.wikimedia.org/" class="origin_title"><img src="./static/Wikimedia-Foundation-logo.svg" alt="Wikimedia Foundation logo" />Wikimedia Research</a>
+		</div>
+	</div>
+
+	<article id="tool_holder">
+		<div id="tool_header--holder" class="boxwidth--1-1 padded--left padded--right">
+			<header id="tool_header">
+				<h1>Machine-generated Article Descriptions</h1>
+				<div class="meta">
+					<div class="disclaimer note">
+						<p>No guarantees are made that this tool will be maintained.</p>
+						<p>This is an experimental tool hosted on <a href="https://wikitech.wikimedia.org/wiki/Portal:Toolforge">Toolforge</a>. No additional personal data is collected by this tool per the Cloud Services
+							<a href="https://wikitech.wikimedia.org/wiki/Wikitech:Cloud_Services_Terms_of_use" target="_blank" rel="noopener">Terms of Use</a>.</p>
+					</div>
+					<div class="description padded--right">
+						<p>This tool showcases a machine learning (AI) model that makes recommendations for <a href="https://en.wikipedia.org/wiki/Wikipedia:Short_description">article descriptions</a> in 25 languages.</p>
+					</div>
+				</div>
+			</header>
+		</div>
+
+		<div class="separator"></div>
+
+		<section id="topic" class="boxwidth--1-1 padded--left padded--right">
+			<main id="tool_main">
+				<section class="form">
+					<form action="#results">
+						<div class="cols cols3">
+							<div class="col col1">
+								<label class="placeholder"><span class="field_name">Language code -- e.g., en for English</span>
+								{% if lang %}
+	                                <select name="facets" id="lang" value="{{lang}}">
+								{% else %}
+	                                <select name="facets" id="lang">
+								{% endif %}
+										<option value="ar">Arabic (ar)</option>
+										<option value="cs">Czech (cs)</option>
+										<option value="de">German (de)</option>
+										<option value="en">English (en)</option>
+										<option value="es">Spanish (es)</option>
+										<option value="et">Estonian (et)</option>
+										<option value="fi">Finnish (fi)</option>
+										<option value="fr">French (fr)</option>
+										<option value="gu">Gujarati (gu)</option>
+										<option value="hi">Hindi (hi)</option>
+										<option value="it">Italian (it)</option>
+										<option value="ja">Japanese (ja)</option>
+										<option value="ko">Korean (ko)</option>
+										<option value="kk">Kazakh (kk)</option>
+										<option value="lt">Lithuanian (lt)</option>
+										<option value="lv">Latvian (lv)</option>
+										<option value="my">Burmese (my)</option>
+										<option value="ne">Nepali (ne)</option>
+										<option value="nl">Dutch (nl)</option>
+										<option value="ro">Romanian (ro)</option>
+										<option value="ru">Russian (ru)</option>
+										<option value="si">Sinhalese (si)</option>
+										<option value="tr">Turkish (tr)</option>
+										<option value="vi">Vietnamese (vi)</option>
+										<option value="zh">Chinese (zh)</option>
+									</select>
+								</label>
+							</div>
+							<div class="col col1">
+								<label class="placeholder"><span class="field_name">Article title -- e.g., Toni Morrison</span>
+								{% if title %}
+									<input type="text" value="{{title}}" placeholder="Placeholder text" id="page_title"/>
+								</label>
+								{% else %}
+									<input type="text" value="" placeholder="Placeholder text" id="page_title"/>
+								{% endif %}
+								</label>
+							</div>
+							<div class="col col1">
+								<span class="field_name"></span>
+								<input type="submit" value="Submit" id="btnSubmit" />
+							</div>
+						</div>
+					</form>
+				</section>
+				<section id="results">
+					<div class="cards">
+						<div class="cols cols2">
+							<div class="col col1">
+								<article class="card" id="page-preview">
+									<!-- Empty section to hold article -->
+								</article><!-- .card -->
+							</div><!-- .col -->
+							<div class="col col1">
+								<section class="text" id="art-descs">
+								<!-- Empty section to hold results -->
+								</section>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+		</section>
+	</article>
+
+	<footer id="tool_footer">
+		<div id="tool_footer-in" class="boxwidth--1-1 padded--left padded--right">
+			<p>Interface developed by <span class="tool-author"><a href="https://meta.wikipedia.org/wiki/User:Isaac_(WMF)">Isaac (WMF)</a></span> to showcase <a href="https://arxiv.org/abs/2205.10012">Descartes model</a>.</p>
+			<ul>
+				<li><a href="https://github.com/geohci/ml-article-descriptions-ui">View Source</a></li>
+				<li><a href="https://arxiv.org/abs/2205.10012">Model Details</a></li>
+				<li><a href="https://github.com/geohci/ml-article-descriptions-ui#license">License</a></li>
+			</ul>
+		</div>
+	</footer>
+
+
+	<script type="text/javascript" src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('form label.placeholder').each(function() {
+				if (!$('input, textarea, select', this).val()) {
+	 				$(this).addClass('off');
+				}
+				$(this).on('focusin', function() {
+					$(this).removeClass('off');
+				});
+				$(this).on('focusout', function() {
+					if (!$('input, textarea, select', this).val()) {
+						$(this).addClass('off');
+					}
+				});
+				$('*[placeholder]', this).attr('placeholder', '');
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		$('#btnSubmit').click(function (e) {
+		   e.preventDefault(); queryArtDescAPI();
+		});
+
+		window.onload = function() {
+			if (document.getElementById('lang').value) {
+				queryTaggingAPIs();
+			}
+		}
+
+		var render_page_preview = function(data) {
+			$("#page-preview").empty();
+			var cardHTML = '<a href="https://' + document.getElementById('lang').value + '.wikipedia.org/wiki/' + document.getElementById('page_title').value + '">';
+			if ("thumbnail" in data) {
+				var imgSrc = data["thumbnail"]["source"];
+				cardHTML += '<div class="img"><figure><img src="' + imgSrc + '" /></figure></div>';
+			}
+			cardHTML += '<div class="texts"><h3>' + document.getElementById('page_title').value + '</h3>';
+			if ("extract_html" in data) {
+				cardHTML += data["extract_html"];
+			}
+			cardHTML += '</div><div class="more">More info. &raquo;</div></a>';
+			$("#page-preview").append(cardHTML);
+		}
+
+	    var render_desc_results = function(data) {
+			$("#art-descs").empty();
+			if ("error" in data) {
+				$("#art-descs").append("<br><p>Error: " + data["error"] + "</p>");
+			}
+			else {
+			  	if (data["results"].length > 0) {
+				  	$("#art-descs").append('<br><h4>>Article Description Recs</a></h4>');
+					for (var rec in data["results"]) {
+						$("#art-descs").append("<li>" + data["results"][rec] + "</li>");
+					}
+			  	}
+			  	else {
+					$("#art-descs").append("<p>No article description recommendations.</p>");
+			  	}
+			  	if ("groundtruth" in data) {
+			  		$("#art-descs").append('<br><h4>Existing Article Description</a></h4>');
+			  		$("#art-descs").append("<li>" + data["groundtruth"] + "</li>");
+			  	}
+			}
+			$("#art-descs").append('<br><p>Seems wrong? Leave feedback on <a href="https://phabricator.wikimedia.org/T318384">Phabricator</a>. Here is a link to this result: ' + generate_permalink() + '</p>');
+		}
+
+		var generate_permalink = function() {
+			var result_url = 'https://ml-article-descriptions.toolforge.org/';
+			if (document.getElementById('lang').value) {
+				result_url = result_url + '?lang=' + document.getElementById('lang').value;
+				if (document.getElementById('page_title').value) {
+					result_url = result_url + '&title=' + document.getElementById('page_title').value;
+				}
+			}
+			return result_url;
+		}
+
+
+		var update_title = function(data) {
+			document.getElementById('page_title').value = data['query']['random'][0]['title'];
+			document.getElementById('page_title').parentNode.className = 'placeholder';
+		}
+
+
+	  	function queryArtDescAPI() {
+	  		if (document.getElementById('lang').value && !document.getElementById('page_title').value) {
+				var randomPageQueryURL = "https://" + document.getElementById('lang').value + ".wikipedia.org/w/api.php?action=query&format=json&list=random&rnlimit=1&rnnamespace=0&origin=*";
+				$.ajax(randomPageQueryURL, {success: update_title.bind(this),
+							  error: function(jqxmlhr, status, error){console.log(status + ": " + error)},
+							  async: false
+							  }
+				  );
+			}
+
+			var articleExtractURL = "https://" + document.getElementById('lang').value + ".wikipedia.org/api/rest_v1/page/summary/" + document.getElementById('page_title').value + "?redirect=true"
+			$.ajax(articleExtractURL, {success: render_page_preview.bind(this),
+							  error: function(jqxmlhr, status, error){console.log(status + ": " + error)}
+							  }
+				  );
+
+			var artDescUrl = "https://ml-article-description-api.wmcloud.org/article?lang=" + document.getElementById('lang').value + "&title=" + document.getElementById('page_title').value;
+			$.ajax(artDescUrl, {success: render_desc_results.bind(this),
+							  error: function(jqxmlhr, status, error){console.log(status + ": " + error)}
+							  }
+				  );
+	  	}
+	</script>
+
+</body>
+</html>

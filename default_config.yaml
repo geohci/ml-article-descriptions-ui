@@ -1,0 +1,5 @@
+# Generate https://... links by default
+PREFERRED_URL_SCHEME: https
+
+# Set to false to prevent users from running arbitrary code
+DEBUG: False
