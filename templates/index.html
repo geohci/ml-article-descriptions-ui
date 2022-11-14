@@ -184,9 +184,9 @@
 			}
 			else {
 			  	if (data["prediction"].length > 0) {
-				  	$("#art-descs").append('<br><h4>>Article Description Recs</a></h4>');
-					for (var rec in data["results"]) {
-						$("#art-descs").append("<li>" + data["results"][rec] + "</li>");
+				  	$("#art-descs").append('<br><h4>Article Description Recs</a></h4>');
+					for (var rec in data["prediction"]) {
+						$("#art-descs").append("<li>" + data["prediction"][rec] + "</li>");
 					}
 			  	}
 			  	else {
