@@ -194,7 +194,11 @@
 			  	}
 			  	if ("groundtruth" in data) {
 			  		$("#art-descs").append('<br><h4>Existing Article Description</a></h4>');
-			  		$("#art-descs").append("<li>" + data["groundtruth"] + "</li>");
+			  		if (data["groundtruth"]) {
+				  		$("#art-descs").append("<li>" + data["groundtruth"] + "</li>");
+					} else {
+						$("#art-descs").append("<li>No existing description</li>");
+					}
 			  	}
 			}
 			$("#art-descs").append('<br><p>Seems wrong? Leave feedback on <a href="https://phabricator.wikimedia.org/T318384">Phabricator</a>. Here is a link to this result: ' + generate_permalink() + '</p>');
