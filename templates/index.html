@@ -46,7 +46,7 @@
 			<main id="tool_main">
 				<section class="form">
 					<form action="#results">
-						<div class="cols cols3">
+						<div class="cols cols4">
 							<div class="col col1">
 								<label class="placeholder"><span class="field_name">Language code -- e.g., en for English</span>
 									<select name="facets" id="lang">
@@ -57,6 +57,16 @@
 											<option value="{{lang[0]}}">{{lang[1]}}</option>
 										{% endif %}
 									{% endfor %}
+									</select>
+								</label>
+							</div>
+							<div class="col col1">
+								<label class="placeholder"><span class="field_name">Number responses</span>
+									<select name="responses" id="numresp">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
 									</select>
 								</label>
 							</div>
@@ -216,7 +226,7 @@
 							  }
 				  );
 
-			var artDescUrl = "https://ml-article-description-api.wmcloud.org/article?lang=" + document.getElementById('lang').value + "&title=" + document.getElementById('page_title').value;
+			var artDescUrl = "https://ml-article-description-api.wmcloud.org/article?lang=" + document.getElementById('lang').value + "&title=" + document.getElementById('page_title').value + "&num_return=" + document.getElementById('numresp').value;
 			$("#art-descs").empty();
 			$.ajax(artDescUrl, {success: render_desc_results.bind(this),
 							  error: function(jqxmlhr, status, error){console.log(status + ": " + error)}
