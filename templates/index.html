@@ -49,36 +49,14 @@
 						<div class="cols cols3">
 							<div class="col col1">
 								<label class="placeholder"><span class="field_name">Language code -- e.g., en for English</span>
-								{% if lang %}
-	                                <select name="facets" id="lang" value="{{lang}}">
-								{% else %}
-	                                <select name="facets" id="lang">
-								{% endif %}
-										<option value="ar">Arabic (ar)</option>
-										<option value="cs">Czech (cs)</option>
-										<option value="de">German (de)</option>
-										<option value="en">English (en)</option>
-										<option value="es">Spanish (es)</option>
-										<option value="et">Estonian (et)</option>
-										<option value="fi">Finnish (fi)</option>
-										<option value="fr">French (fr)</option>
-										<option value="gu">Gujarati (gu)</option>
-										<option value="hi">Hindi (hi)</option>
-										<option value="it">Italian (it)</option>
-										<option value="ja">Japanese (ja)</option>
-										<option value="ko">Korean (ko)</option>
-										<option value="kk">Kazakh (kk)</option>
-										<option value="lt">Lithuanian (lt)</option>
-										<option value="lv">Latvian (lv)</option>
-										<option value="my">Burmese (my)</option>
-										<option value="ne">Nepali (ne)</option>
-										<option value="nl">Dutch (nl)</option>
-										<option value="ro">Romanian (ro)</option>
-										<option value="ru">Russian (ru)</option>
-										<option value="si">Sinhalese (si)</option>
-										<option value="tr">Turkish (tr)</option>
-										<option value="vi">Vietnamese (vi)</option>
-										<option value="zh">Chinese (zh)</option>
+									<select name="facets" id="lang">
+									{% for lang in languages %}
+										{% if lang[0] == lang_select %}
+											<option value="{{lang[0]}}" selected>{{lang[1]}}</option>
+										{% else %}
+											<option value="{{lang[0]}}">{{lang[1]}}</option>
+										{% endif %}
+									{% endfor %}
 									</select>
 								</label>
 							</div>
@@ -178,6 +156,7 @@
 		}
 
 	    var render_desc_results = function(data) {
+	    	console.log(data)
 			if ("error" in data) {
 				$("#art-descs").append("<br><p>Error: " + data["error"] + "</p>");
 			}

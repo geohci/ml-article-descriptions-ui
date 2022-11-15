@@ -6,8 +6,33 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-SUPPORTED_WIKIPEDIA_LANGUAGE_CODES = ['en', 'de', 'nl', 'es', 'it', 'ru', 'fr', 'zh', 'ar', 'vi', 'ja', 'fi', 'ko',
-                                      'tr', 'ro', 'cs', 'et', 'lt', 'kk', 'lv', 'hi', 'ne', 'my', 'si', 'gu']
+SUPPORTED_WIKIPEDIA_LANGUAGE_CODES = {
+    'en':'English (en)',
+    'de':'German (de)',
+    'nl':'Dutch (nl)',
+    'es':'Spanish (es)',
+    'it':'Italian (it)',
+    'ru':'Russian (ru)',
+    'fr':'French (fr)',
+    'zh':'Chinese (zh)',
+    'ar':'Arabic (ar)',
+    'vi':'Vietnamese (vi)',
+    'ja':'Japanese (ja)',
+    'fi':'Finnish (fi)',
+    'ko':'Korean (ko)',
+    'tr':'Turkish (tr)',
+    'ro':'Romanian (ro)',
+    'cs':'Czech (cs)',
+    'et':'Estonian (et)',
+    'lt':'Latvian (lv)',
+    'kk':'Kazakh (kk)',
+    'lv':'Latvian (lv)',
+    'hi':'Hindi (hi)',
+    'ne':'Nepali (ne)',
+    'my':'Burmese (my)',
+    'si':'Sinhalese (si)',
+    'gu':'Gujarati (gu)'
+}
 
 __dir__ = os.path.dirname(__file__)
 app.config.update(
@@ -26,7 +51,8 @@ CORS(app)
 @app.route('/')
 def index():
     lang, title = validate_api_args()
-    return render_template('index.html', lang=lang, title=title)
+    return render_template('index.html', lang_select=lang, title=title,
+                           languages=sorted(SUPPORTED_WIKIPEDIA_LANGUAGE_CODES.items()))
 
 def validate_lang(lang):
     return lang in SUPPORTED_WIKIPEDIA_LANGUAGE_CODES
