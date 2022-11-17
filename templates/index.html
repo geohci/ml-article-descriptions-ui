@@ -35,6 +35,7 @@
 					</div>
 					<div class="description padded--right">
 						<p>This tool showcases a machine learning (AI) model that makes recommendations for <a href="https://en.wikipedia.org/wiki/Wikipedia:Short_description">article descriptions</a> in 25 languages.</p>
+						<p>Choose a language and article to test it out in (or leave the article field blank to select a random article). The number of beams relates to how many different recommendations you'll receive. Higher numbers will take longer but have better quality results.</p>
 					</div>
 				</div>
 			</header>
@@ -61,11 +62,11 @@
 								</label>
 							</div>
 							<div class="col col1">
-								<label class="placeholder"><span class="field_name">Number responses</span>
+								<label class="placeholder"><span class="field_name">Number beams</span>
 									<select name="responses" id="numresp">
 										<option value="1">1</option>
 										<option value="2">2</option>
-										<option value="3">3</option>
+										<option value="3" selected>3</option>
 										<option value="4">4</option>
 									</select>
 								</label>
@@ -226,7 +227,7 @@
 							  }
 				  );
 
-			var artDescUrl = "https://ml-article-description-api.wmcloud.org/article?lang=" + document.getElementById('lang').value + "&title=" + document.getElementById('page_title').value + "&num_return=" + document.getElementById('numresp').value;
+			var artDescUrl = "https://ml-article-description-api.wmcloud.org/article?lang=" + document.getElementById('lang').value + "&title=" + document.getElementById('page_title').value + "&num_beams=" + document.getElementById('numresp').value;
 			$("#art-descs").empty();
 			$.ajax(artDescUrl, {success: render_desc_results.bind(this),
 							  error: function(jqxmlhr, status, error){console.log(status + ": " + error)}
