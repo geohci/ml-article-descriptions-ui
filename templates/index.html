@@ -227,12 +227,26 @@
 							  }
 				  );
 
-			var artDescUrl = "https://ml-article-description-api.wmcloud.org/article?lang=" + document.getElementById('lang').value + "&title=" + document.getElementById('page_title').value + "&num_beams=" + document.getElementById('numresp').value;
+			const artDescUrl = "https://api.wikimedia.org/service/lw/inference/v1/models/article-descriptions:predict"
+			let params = {
+				"lang": document.getElementById('lang').value,
+				"title": document.getElementById('page_title').value,
+				"num_beams": Number(document.getElementById('numresp').value)
+			};
+			let headers = new Headers({
+						"Content-Type": "application/json",
+						"User-Agent": "ml-article-descriptions (toolforge)"
+					});
 			$("#art-descs").empty();
-			$.ajax(artDescUrl, {success: render_desc_results.bind(this),
-							  error: function(jqxmlhr, status, error){console.log(status + ": " + error)}
-							  }
-				  );
+			fetch(artDescUrl, {
+						method: "POST",
+						headers: headers,
+						body: JSON.stringify(params)
+					})
+					.then(response => response.json())
+					.then(inferenceData => render_desc_results(inferenceData))
+					.catch((error) => {console.log(error)
+					})
 	  	}
 	</script>
 
